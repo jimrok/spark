@@ -134,7 +134,10 @@ public class MatcherFilter implements Filter {
 
                 Halt.modify(httpResponse, body, halt);
 
-            } catch (Exception generalException) {
+            } catch (Throwable t) {
+            	
+            	GeneralException generalException = new GeneralException(t.getMessage());
+            	generalException.initCause(t);
 
                 GeneralError.modify(
                         httpRequest,
